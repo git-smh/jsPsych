@@ -7,7 +7,8 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 3rem;
+    /*height: 3rem;*/
+    height: clamp(40px, 6vh, 70px);
     z-index: 1000;
     display: flex;
     align-items: stretch;
@@ -44,6 +45,10 @@
 
 #jspsych-annotation-tool-toolbar button:disabled {
     color: #bababa;
+}
+
+#jspsych-annotation-tool-toolbar i {
+    font-size: 0.6em;
 }
 
 /* all items */

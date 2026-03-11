@@ -706,7 +706,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
 
         annotatedDataset.forEach((item) => {
           if (Array.isArray(item.label)) {
-            // coerce to numbers in case strings sneaked in
+            // sort labels
             item.label = item.label.map(Number).sort((a, b) => a - b);
           }
         });
@@ -754,9 +754,11 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
             jsPsych.pluginAPI.cancelAllKeyboardResponses();
             jsPsych.finishTrial(trialData);
           }
-        } catch (err) {
-          console.error(err);
-          alert("Failed to save annotations to GitHub. Check console for details.");
+        } catch (error) {
+          console.error(error);
+          alert(
+            "Failed to save annotations to GitHub." + "Check your input. Check console for details."
+          );
         }
       }
 
