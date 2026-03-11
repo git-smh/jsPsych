@@ -92,8 +92,6 @@ const info = <const>{
       type: ParameterType.STRING,
       default: undefined,
     },
-    /* use default github actions file, modify it, or use own file
-       must be in .github/workflows/ */
     /**
      * github actions file, for saving to github
      * default:
@@ -161,7 +159,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
   constructor(private jsPsych: JsPsych) {}
 
   trial(display_element: HTMLElement, trial: TrialType<Info>) {
-    //////////////////// STYLESHEETS START ////////////////////
+    //////////////////// > STYLESHEETS ////////////////////
     // icons
     const faLink = document.createElement("link");
     faLink.rel = "stylesheet";
@@ -174,9 +172,9 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
     stylesheetLink.rel = "stylesheet";
     stylesheetLink.href = "jspsych/" + trial.stylesheet.trim();
     document.head.appendChild(stylesheetLink);
-    //////////////////// STYLESHEETS END ////////////////////
+    //////////////////// STYLESHEETS < ////////////////////
 
-    //////////////////// DATASET START ////////////////////
+    //////////////////// > DATASET ////////////////////
     // expected structure of items in dataset
     type DatasetItem = {
       id: number;
@@ -185,7 +183,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
       [key: string]: any;
     };
 
-    /* common prefix for names of data saved locally
+    /* common prefix 'ownerRepoAnnotation' for names of data saved locally
        this allows working on several instances of the annotation tool
        in the same browser on the same device at the same time */
     const owner = (trial.owner ?? "").toLowerCase().trim();
@@ -205,11 +203,12 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
        used to move between items etc.
        load from local storage, otherwise 0 */
     let curIdx = Number(localStorage.getItem(LOCAL_STORAGE_PREFIX + "Index") ?? 0);
-    //////////////////// DATASET END ////////////////////
+    //////////////////// DATASET < ////////////////////
 
-    //////////////////// HELPERS START ////////////////////
-    ///// MAKE METADATA STRING START /////
+    //////////////////// > HELPERS ////////////////////
+    ///// > MAKE METADATA STRING /////
     /**
+     * helper
      * make string containing metadata
      * used by 'all items' buttons, main item
      * @param item an item from dataset
@@ -227,9 +226,9 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
       });
       return metadata;
     }
-    ///// MAKE METADATA STRING END /////
+    ///// MAKE METADATA STRING < /////
 
-    ///// DIALOG START /////
+    ///// > DIALOG /////
     /* small box that displays text
        used by guidelines, keyboard shortcuts, save */
 
@@ -246,6 +245,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
     dialog.appendChild(dialogBody);
 
     /**
+     * helper
      * shows dialog with specified title and text
      * used by guidelines, keyboard shortcuts, save
      * @param title a title
@@ -259,10 +259,10 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
         dialog.showModal();
       }
     }
-    ///// DIALOG END /////
-    //////////////////// HELPERS END ////////////////////
+    ///// DIALOG < /////
+    //////////////////// HELPERS < ////////////////////
 
-    //////////////////// TOOLBAR START ////////////////////
+    //////////////////// > TOOLBAR ////////////////////
     const toolbar = document.createElement("div");
     toolbar.id = "jspsych-annotation-tool-toolbar";
     display_element.appendChild(toolbar);
@@ -275,7 +275,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
     toolbarR.classList.add("toolbar-section", "right");
     toolbar.appendChild(toolbarR);
 
-    ////////// ALL ITEMS START //////////
+    ////////// > ALL ITEMS //////////
     // side panel with all items listed, each item is a button
 
     const allItemsContainer = document.createElement("div");
@@ -322,9 +322,9 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
     });
     allItemsButton.appendChild(allItemsIcon);
     toolbarL.appendChild(allItemsButton);
-    ////////// ALL ITEMS END //////////
+    ////////// ALL ITEMS < //////////
 
-    ////////// GUIDELINES START //////////
+    ////////// > GUIDELINES //////////
     const guidelinesButton = document.createElement("button");
     const guidelinesIcon = document.createElement("i");
     guidelinesIcon.className = "fa fa-book fa-fw fa-lg";
@@ -333,9 +333,9 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
       showDialog("Guidelines", trial.guidelines ?? "No guidelines provided.");
     });
     toolbarL.appendChild(guidelinesButton);
-    ////////// GUIDELINES END //////////
+    ////////// GUIDELINES < //////////
 
-    ////////// KEYBOARD SHORTCUTS START //////////
+    ////////// > KEYBOARD SHORTCUTS //////////
     // expected structure of keyboard shortcuts
     type KeyboardShortcuts = {
       all_items: string;
@@ -496,7 +496,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
     });
     toolbarL.appendChild(keyboardShortcutsButton);
 
-    ///// ACTUAL KEYBOARD SHORTCUTS START /////
+    ///// > ACTUAL KEYBOARD SHORTCUTS /////
     // so that using getKeyboardResponse within function & variable works
     const jsPsych = this.jsPsych;
 
@@ -590,10 +590,10 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
         startKeyboardShortcuts();
       }
     });
-    ///// ACTUAL KEYBOARD SHORTCUTS END /////
-    ////////// KEYBOARD SHORTCUTS END //////////
+    ///// ACTUAL KEYBOARD SHORTCUTS < /////
+    ////////// KEYBOARD SHORTCUTS < //////////
 
-    ////////// PROGRESS BAR START //////////
+    ////////// > PROGRESS BAR //////////
     const progressContainer = document.createElement("div");
     progressContainer.id = "jspsych-annotation-tool-progress-container";
     toolbar.appendChild(progressContainer);
@@ -605,9 +605,9 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
 
     const progressText = document.createElement("span");
     progressContainer.appendChild(progressText);
-    ////////// PROGRESS BAR END //////////
+    ////////// PROGRESS BAR < //////////
 
-    ////////// RAPID MODE START //////////
+    ////////// > RAPID MODE //////////
     let rapidMode = false;
 
     const rapidModeButton = document.createElement("button");
@@ -624,9 +624,9 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
       rapidModeButton.classList.toggle("active", rapidMode);
     });
     toolbarR.appendChild(rapidModeButton);
-    ////////// RAPID MODE END //////////
+    ////////// RAPID MODE < //////////
 
-    ////////// PREV NEXT START //////////
+    ////////// > PREV NEXT //////////
     const prevButton = document.createElement("button");
     const prevIcon = document.createElement("i");
     prevIcon.className = "fa fa-chevron-left fa-fw fa-lg";
@@ -651,9 +651,9 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
       }
     });
     toolbarR.appendChild(nextButton);
-    ////////// PREV NEXT END //////////
+    ////////// PREV NEXT < //////////
 
-    ////////// SAVE START //////////
+    ////////// > SAVE //////////
     const saveButton = document.createElement("button");
     const saveIcon = document.createElement("i");
     saveIcon.className = "fa fa-save fa-fw fa-lg";
@@ -711,6 +711,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
           }
         });
 
+        // data to save
         const trialData = {
           annotator: annotator,
           annotated_dataset: annotatedDataset,
@@ -770,10 +771,10 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
       });
     });
     toolbarR.appendChild(saveButton);
-    ////////// SAVE END //////////
-    //////////////////// TOOLBAR END ////////////////////
+    ////////// SAVE < //////////
+    //////////////////// TOOLBAR < ////////////////////
 
-    //////////////////// LABELS START ////////////////////
+    //////////////////// > LABELS ////////////////////
     const labelsContainer = document.createElement("div");
     labelsContainer.id = "jspsych-annotation-tool-labels-container";
     display_element.appendChild(labelsContainer);
@@ -790,7 +791,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
         const item = annotatedDataset[curIdx];
         // multi label annotation
         if (trial.multi_labels) {
-          // make sure every 'label' holds an array
+          // make sure every 'label' key holds an array value
           if (!Array.isArray(item.label)) {
             item.label = [];
           }
@@ -823,9 +824,9 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
       labelButtons.push(labelButton);
       labelsContainer.appendChild(labelButton);
     });
-    //////////////////// LABELS END ////////////////////
+    //////////////////// LABELS < ////////////////////
 
-    //////////////////// ITEM START ////////////////////
+    //////////////////// > ITEM ////////////////////
     // current item in centre of screen
 
     const itemContainer = document.createElement("div");
@@ -839,24 +840,24 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
     const itemMetadata = document.createElement("p");
     itemMetadata.id = "jspsych-annotation-tool-metadata";
     itemContainer.appendChild(itemMetadata);
-    //////////////////// ITEM END ////////////////////
+    //////////////////// ITEM < ////////////////////
 
-    //////////////////// UPDATE START ////////////////////
+    //////////////////// > UPDATE ////////////////////
     /**
      * update item, prev next buttons, label buttons, progress bar, highlighting of 'all items',
      * save annotated dataset and current item locally
      */
     function updateUi() {
-      // update item
+      // - update item
       const item = annotatedDataset[curIdx];
       itemText.textContent = item.text;
       itemMetadata.textContent = makeMetadataString(item, curIdx, annotatedDataset.length);
 
-      // update prev next buttons
+      // - update prev next buttons
       prevButton.disabled = curIdx === 0;
       nextButton.disabled = curIdx === annotatedDataset.length - 1;
 
-      // update label buttons
+      // - update label buttons
       const curLabels = annotatedDataset[curIdx].label;
       labelButtons.forEach((labelButton, labelButtonIdx) => {
         // if multi labels allowed
@@ -868,12 +869,12 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
         }
       });
 
-      // update progress bar
+      // - update progress bar
       const numLabelledItems = annotatedDataset.filter((item) => item.label !== undefined).length;
       progressBar.value = numLabelledItems;
       progressText.textContent = `${numLabelledItems} of ${annotatedDataset.length} labelled`;
 
-      // update 'all items' highlighting, highlights cur item in side panel
+      // - update 'all items' highlighting, highlights cur item in side panel
       itemButtons.forEach((itemButton, itemButtonIdx) => {
         // if the item button is the current item, highlight
         if (itemButtonIdx === curIdx) {
@@ -885,12 +886,12 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
         }
       });
 
-      /* save annotated dataset & current idx to local storage
+      /* - save annotated dataset & current idx to local storage
          allows continuous annotating without saving to github */
       localStorage.setItem(LOCAL_STORAGE_PREFIX, JSON.stringify(annotatedDataset));
       localStorage.setItem(LOCAL_STORAGE_PREFIX + "Index", String(curIdx));
     }
-    //////////////////// UPDATE END ////////////////////
+    //////////////////// UPDATE < ////////////////////
 
     // initial
     updateUi();
