@@ -114,8 +114,38 @@
 }
 
 #jspsych-annotation-tool-dialog-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-weight: bold;
     margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.jspsych-annotation-tool-dialog-close {
+    background: none;
+    border: none;
+    padding: 0.2rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #808080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.jspsych-annotation-tool-dialog-close i {
+    display: block;
+    line-height: 1;
+    transform: translateY(-1px);
+}
+
+.jspsych-annotation-tool-dialog-close:hover {
+    color: #cccccc;
+}
+
+.jspsych-annotation-tool-dialog-close:focus {
+    outline: none;
 }
 
 .jspsych-annotation-tool-dialog-note {
