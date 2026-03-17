@@ -28,6 +28,6 @@ In addition to the [default data collected by all plugins](https://www.jspsych.o
 
 ```javascript
 var trial = {
-  type: jsPsychAnnotationTool
+  type: jsPsychCrab
 }
 ```

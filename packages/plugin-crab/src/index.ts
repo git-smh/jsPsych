@@ -3,7 +3,7 @@ import { JsPsych, JsPsychPlugin, ParameterType, TrialType } from "jspsych";
 import { version } from "../package.json";
 
 const info = <const>{
-  name: "plugin-annotation-tool",
+  name: "plugin-crab",
   version: version,
   parameters: {
     /**
@@ -13,7 +13,7 @@ const info = <const>{
      */
     stylesheet: {
       type: ParameterType.STRING,
-      default: "jspsych/annotation-tool.css",
+      default: "jspsych/crab.css",
     },
     /**
      * dataset to annotate, as JSON array
@@ -128,8 +128,8 @@ const info = <const>{
 type Info = typeof info;
 
 /**
- * **plugin-annotation-tool**
- * a browser-based serverless text annotation tool built in jsPsych
+ * **CRAB (CRAB rapidly annotates in browsers)**
+ * a browser-based, serverless text annotation tool built in jsPsych
  *
  * allows annotating data with labels and saving annotated data to github
  * ideally hosted on github pages, so no need for a server
@@ -153,7 +153,7 @@ type Info = typeof info;
  * - function that updates gui (update item, prev next buttons, label buttons,
  *   progress bar, highlighting of 'all items', save annotated dataset and current item locally)
  */
-class AnnotationToolPlugin implements JsPsychPlugin<Info> {
+class CrabPlugin implements JsPsychPlugin<Info> {
   static info = info;
 
   constructor(private jsPsych: JsPsych) {}
@@ -243,18 +243,18 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
        used by guidelines, keyboard shortcuts, save */
 
     const dialog = document.createElement("dialog");
-    dialog.id = "jspsych-annotation-tool-dialog";
+    dialog.id = "crab-dialog";
     display_element.appendChild(dialog);
 
     const dialogTitle = document.createElement("div");
-    dialogTitle.id = "jspsych-annotation-tool-dialog-title";
+    dialogTitle.id = "crab-dialog-title";
     dialog.appendChild(dialogTitle);
 
     const dialogTitleText = document.createElement("span");
     dialogTitle.appendChild(dialogTitleText);
 
     const closeButton = document.createElement("button");
-    closeButton.className = "jspsych-annotation-tool-dialog-close";
+    closeButton.className = "crab-dialog-close";
     const closeIcon = document.createElement("i");
     closeIcon.className = "fa fa-times fa-fw";
     closeButton.appendChild(closeIcon);
@@ -264,7 +264,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
     dialogTitle.appendChild(closeButton);
 
     const dialogBody = document.createElement("div");
-    dialogBody.id = "jspsych-annotation-tool-dialog-body";
+    dialogBody.id = "crab-dialog-body";
     dialog.appendChild(dialogBody);
 
     /**
@@ -296,22 +296,22 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
 
     //////////////////// > TOOLBAR ////////////////////
     const toolbar = document.createElement("div");
-    toolbar.id = "jspsych-annotation-tool-toolbar";
+    toolbar.id = "crab-toolbar";
     display_element.appendChild(toolbar);
 
     const toolbarL = document.createElement("div");
-    toolbarL.classList.add("toolbar-section", "left");
+    toolbarL.classList.add("crab-toolbar-section", "left");
     toolbar.appendChild(toolbarL);
 
     const toolbarR = document.createElement("div");
-    toolbarR.classList.add("toolbar-section", "right");
+    toolbarR.classList.add("crab-toolbar-section", "right");
     toolbar.appendChild(toolbarR);
 
     ////////// > ALL ITEMS //////////
     // side panel with all items listed, each item is a button
 
     const allItemsContainer = document.createElement("div");
-    allItemsContainer.id = "jspsych-annotation-tool-all-items";
+    allItemsContainer.id = "crab-all-items";
     allItemsContainer.style.display = "none";
     display_element.appendChild(allItemsContainer);
 
@@ -330,12 +330,12 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
       allItemsContainer.appendChild(itemButton);
 
       const itemText = document.createElement("span");
-      itemText.classList.add("jspsych-annotation-tool-item-from-all-text");
+      itemText.classList.add("crab-item-from-all-items-text");
       itemText.textContent = item.text;
       itemButton.appendChild(itemText);
 
       const itemMetadata = document.createElement("span");
-      itemMetadata.classList.add("jspsych-annotation-tool-item-from-all-metadata");
+      itemMetadata.classList.add("crab-item-from-all-items-metadata");
       itemMetadata.textContent = makeMetadataString(item, itemIdx, annotatedDataset.length);
       itemButton.appendChild(itemMetadata);
     });
@@ -632,7 +632,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
 
     ////////// > PROGRESS BAR //////////
     const progressContainer = document.createElement("div");
-    progressContainer.id = "jspsych-annotation-tool-progress-container";
+    progressContainer.id = "crab-progress-container";
     toolbar.appendChild(progressContainer);
 
     const progressBar = document.createElement("progress");
@@ -859,7 +859,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
 
     //////////////////// > LABELS ////////////////////
     const labelsContainer = document.createElement("div");
-    labelsContainer.id = "jspsych-annotation-tool-labels-container";
+    labelsContainer.id = "crab-labels-container";
     display_element.appendChild(labelsContainer);
 
     // array of label buttons, for easier updating
@@ -868,7 +868,7 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
     // create button for each label
     trial.labels.forEach((label, labelIdx) => {
       const labelButton = document.createElement("button");
-      labelButton.className = "jspsych-annotation-tool-label-button";
+      labelButton.className = "crab-label-button";
       labelButton.textContent = label;
       labelButton.addEventListener("click", () => {
         const item = annotatedDataset[curIdx];
@@ -913,15 +913,15 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
     // current item in centre of screen
 
     const itemContainer = document.createElement("div");
-    itemContainer.id = "jspsych-annotation-tool-item-container";
+    itemContainer.id = "crab-item-container";
     display_element.appendChild(itemContainer);
 
     const itemText = document.createElement("p");
-    itemText.id = "jspsych-annotation-tool-item";
+    itemText.id = "crab-item";
     itemContainer.appendChild(itemText);
 
     const itemMetadata = document.createElement("p");
-    itemMetadata.id = "jspsych-annotation-tool-metadata";
+    itemMetadata.id = "crab-metadata";
     itemContainer.appendChild(itemMetadata);
     //////////////////// ITEM < ////////////////////
 
@@ -982,4 +982,4 @@ class AnnotationToolPlugin implements JsPsychPlugin<Info> {
   }
 }
 
-export default AnnotationToolPlugin;
+export default CrabPlugin;

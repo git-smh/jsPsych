@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Han"  # Replace with last name
+  given-names: "Sung-Jin Miriam"   # Replace with first name
+  # name-particle: "" # Replace with name particle(s)
+  # orcid: ""  # Replace with ORCID
+# More  authors can be listed here in the same format as above
+contact:  # Contact person for this extension
+- family-names: "Han"
+  given-names: "Sung-Jin Miriam"
+  email: "{sung-jin-miriam.han@student.uni-tuebingen.de}"          # Replace with contact person's email
+  # orcid: ""  # Replace with contact person's ORCID
+title: "CRAB"
+version: 0.0.0
+# doi:    # Replace with DOI
+date-released: 2026-01-01
+url: "{softwareUrl}"        # Replace with URL to this extension
+
+# If you wish to cite a paper on this extension instead, you can use the following template:
+preferred-citation:
+  authors:
+  - family-names: "Han"
+    given-names: "Sung-Jin Miriam"
+    # name-particle: ""
+    # orcid: ""
+  # More authors can be listed here in the same format as above
+  date-published: 2026-05-11
+  # doi:
+  # issn:
+  # issue:
+  # journal:
+  # publisher:
+    # name:
+  # start:
+  title: "{title}"
+  type: bachelor thesis               # Other options include: book, pamphlet, conference-paper...
+  url: "{linkToPublicationInJournal}"
+  # volume:
+
+# More information on the preferred-citation CFF format can be found at https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files#citing-something-other-than-software

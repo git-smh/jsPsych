@@ -1,5 +1,5 @@
 :root {
-    --annotation-toolbar-height: clamp(40px, 6vh, 70px);
+    --crab-toolbar-height: clamp(40px, 6vh, 70px);
 }
 
 * {
@@ -7,12 +7,12 @@
 }
 
 /* toolbar */
-#jspsych-annotation-tool-toolbar {
+#crab-toolbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--annotation-toolbar-height);
+    height: var(--crab-toolbar-height);
     display: flex;
     align-items: stretch;
     justify-content: space-between;
@@ -21,16 +21,16 @@
     z-index: 1000;
 }
 
-.toolbar-section {
+.crab-toolbar-section {
     display: flex;
     align-items: center;
 }
 
-.toolbar-section.right {
+.crab-toolbar-section.right {
     margin-left: auto;
 }
 
-#jspsych-annotation-tool-toolbar button {
+#crab-toolbar button {
     height: 100%;
     padding: 0 0.75rem;
     display: flex;
@@ -42,22 +42,22 @@
     cursor: pointer;
 }
 
-#jspsych-annotation-tool-toolbar button:not(:disabled):hover {
+#crab-toolbar button:not(:disabled):hover {
     background: #eeeeee;
 }
 
-#jspsych-annotation-tool-toolbar button:disabled {
+#crab-toolbar button:disabled {
     color: #bababa;
 }
 
-#jspsych-annotation-tool-toolbar i {
+#crab-toolbar i {
     font-size: 1.4rem;
 }
 
 /* all items side panel */
-#jspsych-annotation-tool-all-items {
+#crab-all-items {
     position: fixed;
-    top: var(--annotation-toolbar-height);
+    top: var(--crab-toolbar-height);
     left: 0;
     bottom: 0;
     width: clamp(220px, 22%, 320px);
@@ -67,7 +67,7 @@
     z-index: 900;
 }
 
-#jspsych-annotation-tool-all-items button {
+#crab-all-items button {
     width: 100%;
     margin-bottom: 0.3rem;
     padding: 0.3rem;
@@ -80,34 +80,34 @@
     cursor: pointer;
 }
 
-#jspsych-annotation-tool-all-items button:hover {
+#crab-all-items button:hover {
     background: #eeeeee;
 }
 
-#jspsych-annotation-tool-all-items button.highlighted {
+#crab-all-items button.highlighted {
     border: 2px solid #beeaf9;
     background: #3ec0ed;
     color: white;
 }
 
-#jspsych-annotation-tool-all-items button.highlighted:hover {
+#crab-all-items button.highlighted:hover {
     border: 2px solid #3ec0ed;
     background: #beeaf9;
     color: black;
 }
 
-.jspsych-annotation-tool-item-from-all-text {
+.crab-item-from-all-items-text {
     white-space: pre-wrap;
     margin-bottom: 0.15rem;
 }
 
-.jspsych-annotation-tool-item-from-all-metadata {
+.crab-item-from-all-items-metadata {
     font-size: 0.75rem;
     color: #666666;
 }
 
 /* dialog */
-#jspsych-annotation-tool-dialog {
+#crab-dialog {
     width: min(80%, 700px);
     max-height: 80vh;
     padding: 1.5rem;
@@ -117,7 +117,7 @@
     overflow-y: auto;
 }
 
-#jspsych-annotation-tool-dialog-title {
+#crab-dialog-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -126,7 +126,7 @@
     line-height: 1;
 }
 
-.jspsych-annotation-tool-dialog-close {
+.crab-dialog-close {
     background: none;
     border: none;
     padding: 0.2rem;
@@ -138,28 +138,21 @@
     justify-content: center;
 }
 
-.jspsych-annotation-tool-dialog-close i {
+.crab-dialog-close i {
     display: block;
     line-height: 1;
     transform: translateY(-1px);
 }
 
-.jspsych-annotation-tool-dialog-close:hover {
+.crab-dialog-close:hover {
     color: #cccccc;
 }
 
-.jspsych-annotation-tool-dialog-close:focus {
+.crab-dialog-close:focus {
     outline: none;
 }
 
-.jspsych-annotation-tool-dialog-note {
-    font-size: 0.75rem;
-    color: #808080;
-    margin-top: 1.5rem;
-    margin-bottom: 0;
-}
-
-#jspsych-annotation-tool-dialog::backdrop {
+#crab-dialog::backdrop {
     background: rgba(0,0,0,0.35);
 }
 
@@ -229,7 +222,7 @@
 }
 
 /* progress */
-#jspsych-annotation-tool-progress-container {
+#crab-progress-container {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -242,7 +235,7 @@
     overflow: hidden;
 }
 
-#jspsych-annotation-tool-progress-container progress {
+#crab-progress-container progress {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -254,26 +247,28 @@
     accent-color: #3ec0ed;
 }
 
-#jspsych-annotation-tool-progress-container progress::-webkit-progress-bar {
+#crab-progress-container progress::-webkit-progress-bar {
     background: #fafafa;
     border-radius: 0.75rem;
 }
 
-#jspsych-annotation-tool-progress-container progress::-webkit-progress-value {
+#crab-progress-container progress::-webkit-progress-value {
     background: #3ec0ed;
     border-radius: 0.75rem;
 }
 
-#jspsych-annotation-tool-progress-container progress::-moz-progress-bar {
+#crab-progress-container progress::-moz-progress-bar {
     background: #3ec0ed;
     border-radius: 0.75rem;
 }
 
+/* colour of progress bar was not correct in some instances of safari
+   until this was added */
 progress[value]::-webkit-progress-value {
     background-color: #3ec0ed;
 }
 
-#jspsych-annotation-tool-progress-container span {
+#crab-progress-container span {
     position: absolute;
     inset: 0;
     display: flex;
@@ -289,9 +284,9 @@ progress[value]::-webkit-progress-value {
 }
 
 /* labels */
-#jspsych-annotation-tool-labels-container {
+#crab-labels-container {
     position: fixed;
-    top: calc(var(--annotation-toolbar-height) + 0.5rem);
+    top: calc(var(--crab-toolbar-height) + 0.5rem);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -306,7 +301,7 @@ progress[value]::-webkit-progress-value {
     z-index: 950;
 }
 
-.jspsych-annotation-tool-label-button {
+.crab-label-button {
     padding: 0.35rem 0.9rem;
     border: 1px solid #e0e0e0;
     border-radius: 999rem;
@@ -316,35 +311,37 @@ progress[value]::-webkit-progress-value {
     transition: all 0.15s ease;
 }
 
-.jspsych-annotation-tool-label-button:hover {
+.crab-label-button:hover {
     background: #eeeeee;
 }
 
-.jspsych-annotation-tool-label-button.is-selected {
+.crab-label-button.is-selected {
     background: #3ec0ed;
     border-color: #beeaf9;
     color: white;
     font-weight: 600;
 }
 
-.jspsych-annotation-tool-label-button.is-selected:hover {
+.crab-label-button.is-selected:hover {
     background: #beeaf9;
     border-color: #3ec0ed;
 }
 
 /* item */
-#jspsych-annotation-tool-item-container {
-    width: min(85%, 80ch);
+#crab-item-container {
+    width: 100%;
+    max-width: 80ch;
     margin: auto;
 }
 
-#jspsych-annotation-tool-item {
+#crab-item {
     font-size: 1.2rem;
     white-space: pre-wrap;
     text-align: left;
+    overflow-wrap: break-word;
 }
 
-#jspsych-annotation-tool-metadata {
+#crab-metadata {
     margin-top: 2rem;
     font-size: 0.75rem;
     color: #666666;

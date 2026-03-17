@@ -1,7 +1,7 @@
 {
-  "name": "plugin-annotation-tool",
+  "name": "plugin-crab",
   "version": "0.0.1",
-  "description": "annotation tool",
+  "description": "a browser-based, serverless text annotation tool built in jsPsych",
   "type": "module",
   "main": "dist/index.cjs",
   "exports": {
@@ -38,7 +38,7 @@
   "bugs": {
     "url": "https://github.com/smhancode/jsPsych/issues"
   },
-  "homepage": "https://github.com/smhancode/jsPsych.git/tree/main/packages/plugin-annotation-tool/README.md",
+  "homepage": "https://github.com/smhancode/jsPsych.git/tree/main/packages/plugin-crab/README.md",
   "dependencies": {
     "jspsych": "^8.0.0",
     "@citation-js/core": "^0.7.14",
