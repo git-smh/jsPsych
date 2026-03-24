@@ -20,9 +20,9 @@ const info = <const>{
      * can already have labels
      * e.g.
      * [
-     *   { id: 0, text: "text 0" },
-     *   { id: 1, text: "text 1", label: 0 },
-     *   { id: 2, text: "text 2" },
+     *   { "id": 0, "text": "text 0" },
+     *   { "id": 1, "text": "text 1", label: 0 },
+     *   { "id": 2, "text": "text 2" },
      * ]
      */
     dataset: {
@@ -58,7 +58,7 @@ const info = <const>{
      */
     guidelines: {
       type: ParameterType.HTML_STRING,
-      default: undefined,
+      default: "No guidelines.",
     },
     /**
      * keyboard shortcuts
@@ -71,22 +71,23 @@ const info = <const>{
         guidelines: "g",
         keyboard_shortcuts: "h",
         rapid_mode: "r",
-        prev: "j",
+        previous: "j",
         next: "k",
         save: "s",
         labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
       },
     },
     /**
-     * username of github account which owns the repository
-     * in which the instance of the annotation tool is hosted
+     * username of github account which owns the repository to save annotations to
+     * (ideally the one in which the instance of the annotation tool is hosted)
      */
     owner: {
       type: ParameterType.STRING,
       default: undefined,
     },
     /**
-     * name of repository in which the instance of the annotation tool is hosted
+     * name of repository to save annotations to
+     * (ideally the one in which the instance of the annotation tool is hosted)
      */
     repo: {
       type: ParameterType.STRING,
@@ -342,6 +343,7 @@ class CrabPlugin implements JsPsychPlugin<Info> {
 
     // all items button in toolbar
     const allItemsButton = document.createElement("button");
+    allItemsButton.title = "view list of all items";
     const allItemsIcon = document.createElement("i");
     allItemsIcon.className = "fa fa-bars fa-fw";
     allItemsButton.appendChild(allItemsIcon);
@@ -358,6 +360,7 @@ class CrabPlugin implements JsPsychPlugin<Info> {
 
     ////////// > GUIDELINES //////////
     const guidelinesButton = document.createElement("button");
+    guidelinesButton.title = "view annotation guidelines";
     const guidelinesIcon = document.createElement("i");
     guidelinesIcon.className = "fa fa-book fa-fw";
     guidelinesButton.appendChild(guidelinesIcon);
@@ -374,7 +377,7 @@ class CrabPlugin implements JsPsychPlugin<Info> {
       guidelines: string;
       keyboard_shortcuts: string;
       rapid_mode: string;
-      prev: string;
+      previous: string;
       next: string;
       save: string;
       labels: string[];
@@ -524,6 +527,7 @@ class CrabPlugin implements JsPsychPlugin<Info> {
     }
 
     const keyboardShortcutsButton = document.createElement("button");
+    keyboardShortcutsButton.title = "view keyboard shortcuts";
     const keyboardShortcutsIcon = document.createElement("i");
     keyboardShortcutsIcon.className = "fa fa-keyboard-o fa-fw";
     keyboardShortcutsButton.appendChild(keyboardShortcutsIcon);
@@ -575,7 +579,7 @@ class CrabPlugin implements JsPsychPlugin<Info> {
             case keyboardShortcuts.rapid_mode:
               rapidModeButton.click();
               break;
-            case keyboardShortcuts.prev:
+            case keyboardShortcuts.previous:
               prevButton.click();
               break;
             case keyboardShortcuts.next:
@@ -651,6 +655,9 @@ class CrabPlugin implements JsPsychPlugin<Info> {
     rapidModeButton.className = "rapid-mode-button";
     const rapidModeIcon = document.createElement("i");
     rapidModeIcon.className = "fa fa-bolt fa-fw";
+    rapidModeButton.title =
+      "rapid mode: when labelling with shortcuts, " +
+      "automatically advance to next item (disabled in multi-label mode)";
     rapidModeButton.appendChild(rapidModeIcon);
     if (trial.multi_labels) {
       rapidModeButton.disabled = true;
@@ -665,6 +672,7 @@ class CrabPlugin implements JsPsychPlugin<Info> {
 
     ////////// > PREV NEXT //////////
     const prevButton = document.createElement("button");
+    prevButton.title = "previous item";
     const prevIcon = document.createElement("i");
     prevIcon.className = "fa fa-chevron-left fa-fw";
     prevButton.appendChild(prevIcon);
@@ -678,6 +686,7 @@ class CrabPlugin implements JsPsychPlugin<Info> {
     toolbarR.appendChild(prevButton);
 
     const nextButton = document.createElement("button");
+    nextButton.title = "next item";
     const nextIcon = document.createElement("i");
     nextIcon.className = "fa fa-chevron-right fa-fw";
     nextButton.appendChild(nextIcon);
@@ -692,6 +701,7 @@ class CrabPlugin implements JsPsychPlugin<Info> {
 
     ////////// > SAVE //////////
     const saveButton = document.createElement("button");
+    saveButton.title = "save";
     const saveIcon = document.createElement("i");
     saveIcon.className = "fa fa-save fa-fw";
     saveButton.appendChild(saveIcon);
@@ -715,7 +725,7 @@ class CrabPlugin implements JsPsychPlugin<Info> {
          </div>
          <p>Name may only contain the letters A-Z, numbers, spaces, and hyphens (-).
          It must not start or end with a hyphen.</p>
-         <p>Use the access token your organiser shared with you.</p>
+         <p>Use the access token that the repository owner shared with you.</p>
          <p>Name and token are saved locally.</p>
          <div class="save-buttons">
          <button id="save-and-continue">save and continue</button>
