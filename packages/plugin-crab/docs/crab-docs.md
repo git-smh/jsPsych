@@ -2,7 +2,7 @@
 
 A serverless, browser-based tool for collaborative linguistic annotation.
 
-Ideally hosted on GitHub Pages - so your instance of CRAB and your saved annotations are in the same repository.
+Ideally hosted on GitHub Pages, so your instance of CRAB and your saved annotations are in the same repository.
 
 ## Parameters
 
@@ -47,7 +47,7 @@ Note that CRAB does not use jsPsych's saving mechanism but browsers' `localStora
 ## Setup
 
 1. use the [template](https://github.com/git-smh/CRAB-template) - if hosting on GitHub Pages, put it in a repository and call it `<yourUsername>.github.io`.
-2. modify `index.html` - add your dataset etc. Refer to the [documentation](https://github.com/smhancode/jsPsych.git/tree/main/packages/plugin-crab/docs/plugin-crab.md).
+2. modify `index.html` - add your dataset etc. Refer to this documentation.
 3. create repository-scoped access token with these permissions: read access to repository metadata, and read and write access to GitHub Actions.
 
 ## Example
