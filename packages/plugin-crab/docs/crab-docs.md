@@ -37,7 +37,7 @@ labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
 
 In addition to the [default data collected by all plugins](https://www.jspsych.org/latest/overview/plugins#data-collected-by-all-plugins), this plugin collects the following data for each trial.
 
-Note that CRAB does not use jsPsych's saving mechanism but browsers' `localStorage`, which persists across sessions.
+Note that CRAB does not use jsPsych's saving mechanism but browsers' `localStorage`, which persists across sessions, and saves annotations to GitHub.
 
 | Name              | Type        | Value                       |
 |-------------------|-------------|-----------------------------|
