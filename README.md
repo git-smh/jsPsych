@@ -1,3 +1,13 @@
+# CRAB development repo
+
+[folder](https://github.com/git-smh/jsPsych/tree/main/packages/plugin-crab) (`jsPsych/packages/plugin-crab`)
+
+[README](https://github.com/git-smh/jsPsych/blob/main/packages/plugin-crab/README.md)
+
+[documentation](https://github.com/git-smh/jsPsych/blob/main/packages/plugin-crab/docs/crab-docs.md)
+
+---
+
 ![jspsych logo](http://www.jspsych.org/7.0/img/jspsych-logo.jpg)
 
 jsPsych is a JavaScript framework for creating behavioral experiments that run in a web browser. 
