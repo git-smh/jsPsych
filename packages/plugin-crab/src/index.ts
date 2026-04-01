@@ -967,8 +967,18 @@ class CrabPlugin implements JsPsychPlugin<Info> {
       progressBar.value = numLabelledItems;
       progressText.textContent = `${numLabelledItems} of ${annotatedDataset.length} annotated`;
 
-      // - update 'all items' highlighting, highlights cur item in side panel
+      // - update 'all items' metadata & highlighting, highlights cur item in side panel
       itemButtons.forEach((itemButton, itemButtonIdx) => {
+        const item = annotatedDataset[itemButtonIdx];
+
+        // update metadata text
+        const metadata = itemButton.querySelector(
+          ".crab-item-from-all-items-metadata"
+        ) as HTMLElement;
+        if (metadata) {
+          metadata.textContent = makeMetadataString(item, itemButtonIdx, annotatedDataset.length);
+        }
+
         // if the item button is the current item, highlight
         if (itemButtonIdx === curIdx) {
           itemButton.classList.add("highlighted");
