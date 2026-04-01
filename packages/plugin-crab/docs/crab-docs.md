@@ -47,6 +47,7 @@ The following are saved using browsers' `localStorage` and persist across sessio
 Saving to GitHub:
 + each annotator gets a branch named after them
 + annotations are saved in the folder `annotations` as a JSON file called `YYYY-MM-DD_HH-MM-SS_annotatorName.json` (e.g. `2026-03-23_16-08-50_jane-smith.json`)
++ a pull request to merge to main branch is created automatically
 
 ## Parameters / what to provide at setup
 
