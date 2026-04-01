@@ -2,9 +2,53 @@
 
 A serverless, browser-based tool for collaborative linguistic annotation.
 
-Ideally hosted on GitHub Pages, so your instance of CRAB and your saved annotations are in the same repository.
+Ideally hosted on GitHub Pages, with 1 repository in which both your instance of CRAB and your annotations are saved (any other hosting service or even using it as local files also works).
 
-## Parameters
+## Setup
+
+1. use the [template](https://github.com/git-smh/CRAB-template) - if hosting on GitHub Pages, put it in a repository and call it `<yourUsername>.github.io`.
+
+    structure of template:
+
+   `.github/workflows/` (folders, contain GitHub Actions workflow file)
+
+    `jspsych/` (folder, contains CRAB and jsPsych code and css)
+
+    `index.html` (contains your CRAB instantiation)
+
+2. complete `index.html` - add your dataset etc. Refer to the section on parameters below.
+3. create repository-scoped access token with these permissions: read access to repository metadata, and read and write access to GitHub Actions. Share this token with anyone who is to save annotations.
+
+## Features
+
+The toolbar at the top contains (left to right):
++ dataset overview panel: lists all documents
++ annotation guidelines
++ keyboard shortcuts
++ progress bar: shows how many documents are labelled
++ rapid mode: when labelling via shortcut, automatically advances to the next document; only works in single-label mode (each document can only have 1 label)
++ navigation: previous & next document
++ save
+
+Below the toolbar:
++ label selectors
+
+Centre:
++ current document
++ its metadata: its position in the list of all documents, its id, its label (labels are internally represented as integers starting from 0 in the order in which they are provided at setup)
+
+The following are saved using browsers' `localStorage` and persist across sessions. Clear cookies and site data to reset.
++ annotations
++ current document
++ keyboard shortcuts
++ annotator name
++ access token
+
+Saving to GitHub:
++ each annotator gets a branch named after them
++ annotations are saved in the folder `annotations` as a JSON file called `YYYY-MM-DD_HH-MM-SS_annotatorName.json` (e.g. `2026-03-23_16-08-50_jane-smith.json`)
+
+## Parameters / what to provide at setup
 
 In addition to the [parameters available in all plugins](https://www.jspsych.org/latest/overview/plugins#parameters-available-in-all-plugins), this plugin accepts the following parameters. Parameters with a default value of undefined must be specified. Other parameters can be left unspecified if the default value is acceptable.
 
@@ -20,6 +64,7 @@ In addition to the [parameters available in all plugins](https://www.jspsych.org
 | repo               | string                | undefined            | Name of the GitHub repository to save annotations to.                                                                                                                                                                                                             |
 | workflow           | string                | save-annotations.yml | Name of the GitHub Actions file, which does the saving to GitHub. Use default file, modify it, or provide your own file.                                                                                                                                          |
 
+default keyboard shortcuts:
 ```
 {
 all_items: "a",
@@ -43,12 +88,6 @@ Note that CRAB does not use jsPsych's saving mechanism but browsers' `localStora
 |-------------------|-------------|-----------------------------|
 | annotator         | string      | The entered annotator name. |
 | annotated_dataset | JSON object | The annotated dataset.      |
-
-## Setup
-
-1. use the [template](https://github.com/git-smh/CRAB-template) - if hosting on GitHub Pages, put it in a repository and call it `<yourUsername>.github.io`.
-2. modify `index.html` - add your dataset etc. Refer to this documentation.
-3. create repository-scoped access token with these permissions: read access to repository metadata, and read and write access to GitHub Actions.
 
 ## Example
 
